@@ -1,0 +1,56 @@
+<view class="container">
+  <view class="header">订单列表</view>
+
+  <!-- 登录区块：未登录时显示 -->
+  <view class="login" wx:if="{{!loggedIn}}">
+    <view class="login-actions">
+      <button type="primary" bindtap="goLogin">去登录</button>
+    </view>
+    <view class="hint">登录后可查看我的订单</view>
+  </view>
+
+  <block wx:if="{{loggedIn}}">
+    <view class="filters">
+      <picker mode="selector" range="{{statusLabels}}" value="{{statusIndex}}" bindchange="onStatusChange" class="picker">
+        <view class="picker-inner">状态：{{statusLabels[statusIndex]}}</view>
+      </picker>
+      <picker mode="selector" range="{{verifyLabels}}" value="{{verifyIndex}}" bindchange="onVerifyChange" class="picker">
+        <view class="picker-inner">核销：{{verifyLabels[verifyIndex]}}</view>
+      </picker>
+      <picker mode="selector" range="{{lineLabels}}" value="{{lineIndex}}" bindchange="onLineChange" class="picker">
+        <view class="picker-inner">线路：{{lineLabels[lineIndex]}}</view>
+      </picker>
+      <picker mode="selector" range="{{sortByLabels}}" value="{{sortByIndex}}" bindchange="onSortByChange" class="picker">
+        <view class="picker-inner">排序：{{sortByLabels[sortByIndex]}}</view>
+      </picker>
+      <picker mode="selector" range="{{sortOrderLabels}}" value="{{sortOrderIndex}}" bindchange="onSortOrderChange" class="picker">
+        <view class="picker-inner">方向：{{sortOrderLabels[sortOrderIndex]}}</view>
+      </picker>
+      <button size="mini" class="clear-btn" bindtap="clearFilters">清空</button>
+    </view>
+
+    <block wx:if="{{items.length === 0}}">
+      <view class="empty">暂无订单</view>
+    </block>
+    <block wx:else>
+      <view class="list">
+        <block wx:for="{{items}}" wx:key="id">
+          <view class="item" bindtap="goDetail" data-id="{{item.id}}">
+            <view class="line top">
+              <text>订单号：{{item.id}}</text>
+              <view class="tags">
+                <text class="tag status status-{{item.status}}">{{item.status}}</text>
+                <text class="tag verify verify-{{item.verify_status}}">{{item.verify_status}}</text>
+              </view>
+            </view>
+            <view class="line">线路：{{item.line && item.line.name || '-'}}（#{{item.line && item.line.id || '-' }}）</view>
+            <view class="line">数量：{{item.quantity}}</view>
+            <view class="line minor">下单：{{item.created_at}}｜有效期至：{{item.expire_at}}</view>
+          </view>
+        </block>
+      </view>
+      <view class="footer" wx:if="{{loading}}">加载中...</view>
+      <view class="footer" wx:if="{{!hasMore && items.length > 0}}">已无更多</view>
+    </block>
+  </block>
+</view>

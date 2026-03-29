@@ -1,0 +1,3 @@
+/* 登录页局部样式（复用全局 header/card/line/login-actions） */
+.login-row{display:flex;gap:16rpx;align-items:center;margin-top:8rpx;}
+.phone-input{flex:1;height:64rpx;border:1rpx solid #ddd;border-radius:8rpx;padding:0 16rpx;}

@@ -1,0 +1,11 @@
+.page { padding: 24rpx; }
+.profile-header { display: flex; align-items: center; gap: 20rpx; margin-bottom: 20rpx; }
+.avatar { width: 100rpx; height: 100rpx; border-radius: 50%; background: #f0f0f0; }
+.nickname { font-size: 32rpx; font-weight: 600; }
+.card { background: #ffffff; border-radius: 16rpx; padding: 24rpx; box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.04); }
+.card + .card { margin-top: 24rpx; }
+.card-title { font-size: 28rpx; font-weight: 600; margin-bottom: 16rpx; }
+.input { border: 1rpx solid #e8e8e8; border-radius: 12rpx; padding: 16rpx; margin-bottom: 16rpx; }
+.btn-primary { background: #19a15e; color: #fff; border: none; border-radius: 12rpx; padding: 20rpx; }
+.btn-secondary { background: #f5f7f8; color: #333; border: none; border-radius: 12rpx; padding: 20rpx; }
+.hint { margin-top: 12rpx; color: #888; font-size: 24rpx; }

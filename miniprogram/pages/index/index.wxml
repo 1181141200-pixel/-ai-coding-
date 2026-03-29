@@ -1,0 +1,27 @@
+<view class="container">
+  <swiper class="hero-swiper" autoplay="true" interval="4000" circular="true">
+    <swiper-item>
+      <view class="hero-slide hero-1"><text class="hero-title">轻旅居 · 线路精选</text></view>
+    </swiper-item>
+    <swiper-item>
+      <view class="hero-slide hero-2"><text class="hero-title">轻参与 · 活动速览</text></view>
+    </swiper-item>
+    <swiper-item>
+      <view class="hero-slide hero-3"><text class="hero-title">轻栖居 · 基地推荐</text></view>
+    </swiper-item>
+  </swiper>
+  <view class="section">
+    <navigator class="list-item" open-type="switchTab" url="/pages/combined/index">
+      <view class="list-item-title">三合一</view>
+      <view class="chevron">›</view>
+    </navigator>
+    <navigator class="list-item" open-type="switchTab" url="/pages/orders/index">
+      <view class="list-item-title">订单</view>
+      <view class="chevron">›</view>
+    </navigator>
+    <navigator class="list-item" open-type="switchTab" url="/pages/profile/index">
+      <view class="list-item-title">我的</view>
+      <view class="chevron">›</view>
+    </navigator>
+  </view>
+</view>

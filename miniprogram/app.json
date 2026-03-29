@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/combined/index",
+    "pages/profile/index",
+    "pages/login/index",
+    "pages/lines/index",
+    "pages/lines/detail",
+    "pages/activities/index",
+    "pages/activities/detail",
+    "pages/bases/index",
+    "pages/bases/detail",
+    "pages/orders/index",
+    "pages/orders/detail"
+  ],
+  "window": {
+    "navigationBarTitleText": "旅居项目",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#19a15e",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "主页" },
+      { "pagePath": "pages/combined/index", "text": "三合一" },
+      { "pagePath": "pages/orders/index", "text": "订单" },
+      { "pagePath": "pages/profile/index", "text": "我的" }
+    ]
+  },
+  "lazyCodeLoading": "requiredComponents"
+}

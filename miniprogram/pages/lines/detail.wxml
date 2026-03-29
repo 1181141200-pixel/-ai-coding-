@@ -1,0 +1,42 @@
+<view class="container">
+  <view class="header">线路详情</view>
+
+  <!-- 错误态显示 -->
+  <block wx:if="{{errorMsg}}">
+    <view class="error-block">
+      <view class="error-title">加载失败</view>
+      <view class="error-msg">{{errorMsg}}</view>
+      <view class="error-actions">
+        <button size="mini" type="primary" bindtap="retryFetch">重试</button>
+        <button size="mini" bindtap="backToList">返回列表</button>
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{!errorMsg && !line}}">
+    <view class="empty">正在加载...</view>
+  </block>
+  <block wx:if="{{!errorMsg && line}}">
+    <view class="card">
+      <view class="line">编号：{{line.id}}</view>
+      <view class="line">名称：{{line.name}}</view>
+      <view class="line" wx:if="{{line.period}}">周期：{{line.period}}</view>
+      <view class="line" wx:if="{{line.status}}">状态：{{line.status}}</view>
+      <view class="line" wx:if="{{line.available_count !== undefined}}">可售：{{line.available_count}}</view>
+      <view class="line" wx:if="{{line.sold_count !== undefined}}">已售：{{line.sold_count}}</view>
+    </view>
+
+    <!-- 下单区域 -->
+    <view class="card">
+      <view class="line">下单数量</view>
+      <view class="qty-row">
+        <button size="mini" bindtap="onMinus">-</button>
+        <text class="qty">{{quantity}}</text>
+        <button size="mini" bindtap="onPlus">+</button>
+      </view>
+      <button class="buy-btn" type="primary" bindtap="createOrder" disabled="{{createLoading || !canCreate || !loggedIn}}">{{createLoading ? '提交中...' : '立即下单'}}</button>
+      <view class="hint" wx:if="{{!loggedIn}}">请先登录后再下单</view>
+      <view class="hint" wx:if="{{!canCreate}}">当前不可下单（库存不足或状态不符）</view>
+    </view>
+  </block>
+</view>

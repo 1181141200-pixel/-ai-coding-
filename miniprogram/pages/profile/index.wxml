@@ -1,0 +1,23 @@
+<view class="page">
+  <view class="profile-header">
+    <view class="avatar"></view>
+    <view class="nickname">{{member && (member.nickname || member.name || member.phone) || '未登录'}}</view>
+  </view>
+
+  <block wx:if="{{!loggedIn}}">
+    <view class="card">
+      <view class="card-title">手机号登录</view>
+      <input class="input" type="number" maxlength="11" placeholder="请输入手机号" value="{{phone}}" bindinput="onPhoneInput" />
+      <button class="btn-primary" bindtap="onLogin">登录</button>
+      <view class="hint">登录后可查看订单与参与记录</view>
+    </view>
+  </block>
+
+  <block wx:if="{{loggedIn}}">
+    <view class="card">
+      <view class="card-title">账号信息</view>
+      <view>手机号：{{member && member.phone}}</view>
+      <button class="btn-secondary" bindtap="onLogout">退出登录</button>
+    </view>
+  </block>
+</view>

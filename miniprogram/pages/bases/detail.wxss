@@ -1,0 +1,4 @@
+/* 登录区域样式 */
+.login-row{display:flex;gap:16rpx;align-items:center;margin-top:8rpx;}
+.phone-input{flex:1;height:64rpx;border:1rpx solid #ddd;border-radius:8rpx;padding:0 16rpx;}
+/* 错误态与提示统一走全局样式 */

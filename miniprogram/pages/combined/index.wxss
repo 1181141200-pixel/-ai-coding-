@@ -1,0 +1,23 @@
+.page { padding: 24rpx; }
+.segmented {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+.seg-item {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  border-radius: 20rpx;
+  background: #f5f7f8;
+  color: #666;
+}
+.seg-item.active {
+  background: #e9f7f1;
+  color: #19a15e;
+  font-weight: 600;
+}
+.loading, .error, .empty {
+  padding: 20rpx;
+  color: #888;
+}

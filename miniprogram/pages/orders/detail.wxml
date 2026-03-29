@@ -1,0 +1,55 @@
+<view class="container">
+  <view class="header">订单详情</view>
+
+  <!-- 登录区块：未登录时显示 -->
+  <view class="login" wx:if="{{!loggedIn}}">
+    <view class="login-actions">
+      <button type="primary" bindtap="goLogin">去登录</button>
+    </view>
+    <view class="hint">登录后可查看订单详情与执行操作</view>
+  </view>
+
+  <!-- 错误态展示 -->
+  <block wx:if="{{errorMsg}}">
+    <view class="error-block">
+      <view class="error-title">加载失败</view>
+      <view class="error-msg">{{errorMsg}}</view>
+      <view class="error-actions">
+        <button size="mini" type="primary" bindtap="retryFetch">重试</button>
+        <button size="mini" class="plain-btn" bindtap="goList">返回订单列表</button>
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{loggedIn && order}}">
+    <view class="card">
+      <view class="line">订单号：{{order.id}}</view>
+      <view class="line">线路：{{order.line && order.line.name || '-'}}（#{{order.line && order.line.id || '-' }}）</view>
+      <view class="line">数量：{{order.quantity}}</view>
+      <view class="line">状态：{{order.status}}</view>
+      <view class="line">核销：{{order.verify_status}}</view>
+      <view class="line">下单时间：{{order.created_at}}</view>
+      <view class="line">截止时间：{{order.expire_at}}</view>
+    </view>
+
+    <view class="actions">
+      <button type="primary" bindtap="handlePay" wx:if="{{order.status === 'pending_pay'}}" disabled="{{payLoading || !canPay}}">{{payLoading ? '支付中...' : '支付'}}</button>
+      <view class="perm-hint" wx:if="{{order.status === 'pending_pay' && !canPay}}">{{payReason}}</view>
+
+      <button type="primary" bindtap="handleVerify" wx:if="{{order.status === 'paid' && order.verify_status === 'unverified'}}" disabled="{{verifyLoading || !canVerify}}">{{verifyLoading ? '核销中...' : '核销'}}</button>
+      <view class="perm-hint" wx:if="{{order.status === 'paid' && order.verify_status === 'unverified' && !canVerify}}">{{verifyReason}}</view>
+
+      <button type="warn" bindtap="handleUnverify" wx:if="{{order.status === 'used' && order.verify_status === 'verified'}}" disabled="{{unverifyLoading || !canUnverify}}">{{unverifyLoading ? '反核销中...' : '反核销'}}</button>
+      <view class="perm-hint" wx:if="{{order.status === 'used' && order.verify_status === 'verified' && !canUnverify}}">{{unverifyReason}}</view>
+
+      <button bindtap="handleRefund" wx:if="{{order.status === 'paid' && order.verify_status === 'unverified'}}" disabled="{{refundLoading || !canRefund}}">{{refundLoading ? '申请中...' : '申请退款'}}</button>
+      <view class="perm-hint" wx:if="{{order.status === 'paid' && order.verify_status === 'unverified' && !canRefund}}">{{refundReason}}</view>
+    </view>
+
+    <view class="hint minor">提示：若提示无权限，请联系管理员处理。</view>
+  </block>
+
+  <block wx:if="{{loggedIn && !order && !errorMsg}}">
+    <view class="empty">正在加载...</view>
+  </block>
+</view>

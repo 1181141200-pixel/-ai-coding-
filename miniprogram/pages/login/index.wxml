@@ -1,0 +1,14 @@
+<view class="container">
+  <view class="header">登录</view>
+  <view class="card">
+    <view class="line">请使用手机号登录</view>
+    <view class="login-row">
+      <input class="phone-input" type="number" maxlength="11" placeholder="请输入手机号" bindinput="onLoginPhoneInput" />
+      <button size="mini" type="primary" bindtap="loginWithPhone" disabled="{{loginLoading || !loginPhoneValid}}">{{loginLoading ? '登录中...' : '登录'}}</button>
+    </view>
+    <view class="login-actions">
+      <button class="plain-btn" open-type="getPhoneNumber" bindgetphonenumber="onGetPhoneNumber">一键获取手机号</button>
+    </view>
+    <view class="hint">登录成功将自动返回或跳转到目标页</view>
+  </view>
+</view>

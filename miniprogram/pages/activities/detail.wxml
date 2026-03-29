@@ -1,0 +1,48 @@
+<view class="container">
+  <view class="header">活动详情</view>
+
+  <!-- 错误态显示 -->
+  <block wx:if="{{errorMsg}}">
+    <view class="error-block">
+      <view class="error-title">加载失败</view>
+      <view class="error-msg">{{errorMsg}}</view>
+      <view class="error-actions">
+        <button size="mini" type="primary" bindtap="retryFetch">重试</button>
+        <button size="mini" bindtap="backToList">返回列表</button>
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{!errorMsg && !activity}}">
+    <view class="empty">正在加载...</view>
+  </block>
+  <block wx:if="{{!errorMsg && activity}}">
+    <view class="card">
+      <view class="line">编号：{{activity.id}}</view>
+      <view class="line">名称：{{activity.name}}</view>
+      <view class="line" wx:if="{{activity.activity_time_range}}">活动时间：{{activity.activity_time_range}}</view>
+      <view class="line" wx:if="{{activity.signup_time_range}}">报名时间：{{activity.signup_time_range}}</view>
+      <view class="line" wx:if="{{activity.capacity !== undefined}}">容量：{{activity.capacity}}</view>
+      <view class="line" wx:if="{{activity.signup_count !== undefined}}">已报名：{{activity.signup_count}}</view>
+    </view>
+
+    <!-- 去除独立登录区块，保留按钮级登录提示 -->
+
+    <view class="form">
+      <view class="field">
+        <text class="label">报名手机号（可选）</text>
+        <input class="input" placeholder="请输入手机号" value="{{phone}}" bindinput="onPhoneInput" type="number" maxlength="11" />
+      </view>
+      <view class="field">
+        <text class="label">备注（可选）</text>
+        <input class="input" placeholder="备注信息" value="{{note}}" bindinput="onNoteInput" />
+      </view>
+    </view>
+
+    <view class="actions">
+      <button type="primary" bindtap="signup" loading="{{signupLoading}}" disabled="{{signupLoading || !canSignup || !loggedIn}}">
+        {{ signupLoading ? '报名中...' : (!loggedIn ? '请先登录' : (canSignup ? '报名参加' : '名额已满')) }}
+      </button>
+    </view>
+  </block>
+</view>

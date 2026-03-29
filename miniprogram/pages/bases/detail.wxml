@@ -1,0 +1,32 @@
+<view class="container">
+  <view class="header">基地详情</view>
+
+  <!-- 已移除独立登录区域，基地详情可供未登录用户浏览 -->
+
+  <!-- 错误态显示 -->
+  <block wx:if="{{errorMsg}}">
+    <view class="error-block">
+      <view class="error-title">加载失败</view>
+      <view class="error-msg">{{errorMsg}}</view>
+      <view class="error-actions">
+        <button size="mini" type="primary" bindtap="retryFetch">重试</button>
+        <button size="mini" bindtap="backToList">返回列表</button>
+      </view>
+    </view>
+  </block>
+
+  <!-- 详情展示 -->
+  <block wx:if="{{!errorMsg}}">
+    <block wx:if="{{!base}}">
+      <view class="empty">{{loading ? '正在加载...' : '暂无数据'}}</view>
+    </block>
+    <block wx:else>
+      <view class="card">
+        <view class="line">编号：{{base.id}}</view>
+        <view class="line">名称：{{base.name}}</view>
+        <view class="line" wx:if="{{base.province_city}}">位置：{{base.province_city}}</view>
+        <view class="line" wx:if="{{base.facilities}}">设施：{{base.facilities}}</view>
+      </view>
+    </block>
+  </block>
+</view>

@@ -1,0 +1,6 @@
+.login-row { display: flex; gap: 12rpx; align-items: center; }
+.phone-input { flex: 1; border: 1rpx solid #ddd; border-radius: 8rpx; padding: 12rpx; }
+.qty-row { display: flex; align-items: center; gap: 20rpx; margin: 12rpx 0; }
+.qty { font-size: 28rpx; min-width: 60rpx; text-align: center; }
+.buy-btn { margin-top: 12rpx; }
+/* 错误态与提示统一走全局样式 */

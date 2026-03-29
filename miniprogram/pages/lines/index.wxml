@@ -1,0 +1,33 @@
+<view class="container">
+  <view class="title">线路列表</view>
+  <view class="back-bar">
+    <navigator class="back-arrow" open-type="reLaunch" url="/pages/index/index">‹</navigator>
+  </view>
+
+  <!-- 错误态显示 -->
+  <block wx:if="{{errorMsg}}">
+    <view class="error-block">
+      <view class="error-title">加载失败</view>
+      <view class="error-msg">{{errorMsg}}</view>
+      <view class="error-actions">
+        <button size="mini" type="primary" bindtap="retryList">重试</button>
+      </view>
+    </view>
+  </block>
+
+  <!-- 列表区域：未登录也可浏览 -->
+  <block wx:if="{{!errorMsg}}">
+    <view wx:if="{{loading}}">加载中...</view>
+    <view wx:elif="{{list.length === 0}}">暂无数据</view>
+    <view wx:else>
+      <view class="section list">
+        <block wx:for="{{list}}" wx:key="id">
+          <view class="list-item" bindtap="goDetail" data-id="{{item.id}}">
+            <view class="list-item-title">{{item.name}}</view>
+            <view class="chevron">›</view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
+</view>
